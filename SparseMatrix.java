@@ -26,6 +26,7 @@ public final class SparseMatrix {
 		}
 	}
 	
+	//to Return the transpose of a matrix 
 	public SparseMatrix transposeMatrix() {
 		Map<Integer, Map<Integer, Integer>> transposedValuesMap = new HashMap<>();
 		for(int row : values.keySet()) {
@@ -38,32 +39,26 @@ public final class SparseMatrix {
 		return new SparseMatrix(columns, rows, transposedValuesMap);
 	}
 	
-	
+	//To check is matrix symmetrical
 	public boolean isMatrixSymmetrical() {
-		if(rows != columns) {
-			return false;
-		}
-		
-		SparseMatrix transposeMatrix = this.transposeMatrix();
-		return this.equals(transposeMatrix);	
+	    if (rows != columns) {
+	        return false; // A non-square matrix cant be symmetrical
+	    }
+
+	    for (int i : values.keySet()) {
+	        for (int j : values.get(i).keySet()) {
+	            // Check if the value at (i, j) is equal to the value at (j, i)
+	            int valueAtIJ = values.get(i).getOrDefault(j, 0);
+	            int valueAtJI = values.get(j).getOrDefault(i, 0);
+	            if (valueAtIJ != valueAtJI) {
+	                return false; // Found a mismatch
+	            }
+	        }
+	    }
+	    return true; // All corresponding values matched
 	}
 	
-	  
-	
-	public boolean isMatrixEquals(Object obj) {
-		if(this == obj) {
-			return true;
-		}
-		
-		if(!(obj instanceof SparseMatrix)) {
-			return false;
-		}
-		
-		SparseMatrix otherMatrix = (SparseMatrix) obj;
-		
-		return this.rows == otherMatrix.rows && this.columns == otherMatrix.columns && this.values.equals(otherMatrix.values);
-	}
-	
+	//To perform addition of two matrices
 	public SparseMatrix additionMatrix(SparseMatrix otherMatrix) {
 		if(this.rows != otherMatrix.rows || this.columns != otherMatrix.columns) {
 			throw new IllegalArgumentException("Matrix Dimensions must be same for addition.");
@@ -88,6 +83,38 @@ public final class SparseMatrix {
 		return new SparseMatrix(rows, columns, resultMap);
 	}
 	
+	
+	//to perform matrix multiplication
+	public SparseMatrix multiplicationMatrix(SparseMatrix otherMatrix) {
+	    if (this.columns != otherMatrix.rows) {
+	        throw new IllegalArgumentException("Matrix dimensions must be compatible for multiplication.");
+	    }
+
+	    Map<Integer, Map<Integer, Integer>> resultMap = new HashMap<>();
+
+	    // Iterate through non-zero entries of the first matrix
+	    for (int i : this.values.keySet()) {
+	        for (int j : this.values.get(i).keySet()) {
+	            int valueA = this.values.get(i).get(j);
+
+	         // For each non-zero entry in the first matrix, find corresponding entries in the second matrix
+	            if (otherMatrix.values.containsKey(j)) {
+	                for (int k : otherMatrix.values.get(j).keySet()) {
+	                    int valueB = otherMatrix.values.get(j).get(k);
+
+	                    // Calculate the product and add it to the result
+	                    int product = valueA * valueB;
+	                    resultMap.computeIfAbsent(i, k1 -> new HashMap<>())
+	                             .merge(k, product, Integer::sum);
+	                }
+	            }
+	        }
+	    }
+
+	    return new SparseMatrix(this.rows, otherMatrix.columns, resultMap);
+	}
+
+	//to print the matrix in correct way
 	@Override
 	public String toString() {
 		StringBuilder sBuilder = new StringBuilder();
