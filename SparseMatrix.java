@@ -26,7 +26,10 @@ public final class SparseMatrix {
 		}
 	}
 	
-	//to Return the transpose of a matrix 
+	/**
+	 * To Return the transpose of a matrix  
+	 * @return transpose Matrix
+	 */
 	public SparseMatrix transposeMatrix() {
 		Map<Integer, Map<Integer, Integer>> transposedValuesMap = new HashMap<>();
 		for(int row : values.keySet()) {
@@ -39,7 +42,10 @@ public final class SparseMatrix {
 		return new SparseMatrix(columns, rows, transposedValuesMap);
 	}
 	
-	//To check is matrix symmetrical
+	/**
+	 * To check is matrix symmetrical
+	 * @return boolean true if matrix is symmetrical else false
+	 */
 	public boolean isMatrixSymmetrical() {
 	    if (rows != columns) {
 	        return false; // A non-square matrix cant be symmetrical
@@ -58,7 +64,11 @@ public final class SparseMatrix {
 	    return true; // All corresponding values matched
 	}
 	
-	//To perform addition of two matrices
+	/**
+	 * To perform addition of two matrices
+	 * @param otherMatrix  which we will add in this matrix
+	 * @return added sparseMatrix
+	 */
 	public SparseMatrix additionMatrix(SparseMatrix otherMatrix) {
 		if(this.rows != otherMatrix.rows || this.columns != otherMatrix.columns) {
 			throw new IllegalArgumentException("Matrix Dimensions must be same for addition.");
@@ -84,7 +94,11 @@ public final class SparseMatrix {
 	}
 	
 	
-	//to perform matrix multiplication
+	/**
+	 * To perform matrix multiplication
+	 * @param otherMatrix, which we will multiply with this matrix
+	 * @return matrix , which we will get on mutliplying 2 matrices
+	 */
 	public SparseMatrix multiplicationMatrix(SparseMatrix otherMatrix) {
 	    if (this.columns != otherMatrix.rows) {
 	        throw new IllegalArgumentException("Matrix dimensions must be compatible for multiplication.");
@@ -114,7 +128,9 @@ public final class SparseMatrix {
 	    return new SparseMatrix(this.rows, otherMatrix.columns, resultMap);
 	}
 
-	//to print the matrix in correct way
+	/**
+	 * To print the matrix in correct way, proper matrix way
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sBuilder = new StringBuilder();
