@@ -8,6 +8,9 @@ public final class SparseMatrix {
 	public final int columns;
 	public final Map<Integer, Map<Integer, Integer>> values;
 	
+	//To access a value in the HashMap, use the get() method and refer to its key:: values.get(keyName)
+	//Use the keySet() method if you only want the keys, and use the values() method if you only want the values:
+	
 	
 	//constructor
 	public SparseMatrix(int rows, int columns, Map<Integer, Map<Integer, Integer>> values) {
@@ -97,7 +100,7 @@ public final class SparseMatrix {
 	/**
 	 * To perform matrix multiplication
 	 * @param otherMatrix, which we will multiply with this matrix
-	 * @return matrix , which we will get on mutliplying 2 matrices
+	 * @return matrix , which we will get on multiplying 2 matrices
 	 */
 	public SparseMatrix multiplicationMatrix(SparseMatrix otherMatrix) {
 	    if (this.columns != otherMatrix.rows) {

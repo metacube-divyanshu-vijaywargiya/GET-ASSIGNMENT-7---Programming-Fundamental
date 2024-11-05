@@ -27,7 +27,7 @@ public class MainClass {
 			SparseMatrix transposeMatrix = sparseMatrix.transposeMatrix();
 			System.out.println("Transpose : " + transposeMatrix);
 			
-			System.out.println("Is Matrix Symmetrical : " + sparseMatrix1.isMatrixSymmetrical());
+			System.out.println("Is Matrix Symmetrical : " + sparseMatrix1.isMatrixSymmetrical()+"\n");
 			
 			//Addition matrix
 			Map<Integer, Map<Integer, Integer>> values2 = new HashMap<>();
@@ -46,7 +46,7 @@ public class MainClass {
 			values4.put(3, Map.of(4, 1));
 			values4.put(4, Map.of(5, 6));
 			
-			SparseMatrix matrix3 = new SparseMatrix(5, 6, values4); // 6 rows, 6 columns
+			SparseMatrix matrix3 = new SparseMatrix(6, 6, values4); // 6 rows, 6 columns
 			System.out.println(sparseMatrix);
 			System.out.println(matrix3);
 			SparseMatrix multiplicationMatrix = sparseMatrix.multiplicationMatrix(matrix3);
