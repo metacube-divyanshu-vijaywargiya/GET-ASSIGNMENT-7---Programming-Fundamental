@@ -81,7 +81,13 @@ public class MainClass {
             for (int i = 0; i < nonZeroCount3; i++) {
                 System.out.print("Enter row index, column index, and value (space-separated): ");
                 int row = scanner.nextInt();
+                if(row >= rows3) {
+                	throw new IllegalArgumentException("Please Enter Valid Row Index.");
+                }
                 int col = scanner.nextInt();
+                if(col >= cols3) {
+                	throw new IllegalArgumentException("Please Enter Valid Column Index.");                	
+                }
                 int value = scanner.nextInt();
                 values3.computeIfAbsent(row, k -> new HashMap<>()).put(col, value);
             }
