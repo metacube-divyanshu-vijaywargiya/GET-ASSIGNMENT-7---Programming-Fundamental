@@ -70,7 +70,7 @@ public final class SparseMatrix {
 	/**
 	 * To perform addition of two matrices
 	 * @param otherMatrix  which we will add in this matrix
-	 * @return added sparseMatrix
+	 * @return added sparseMatrix 
 	 */
 	public SparseMatrix additionMatrix(SparseMatrix otherMatrix) {
 		if(this.rows != otherMatrix.rows || this.columns != otherMatrix.columns) {
